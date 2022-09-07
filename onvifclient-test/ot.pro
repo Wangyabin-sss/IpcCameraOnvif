@@ -7,10 +7,14 @@ SOURCES += \
         ./samples/remoteDiscovery/remoteDiscovery.cpp \
         ./samples/ptzBinding/ptzBinding.cpp \
         ./samples/mediaBinding/mediaBinding.cpp \
-        ./samples/deviceBinding/deviceBinding.cpp
+        ./samples/deviceBinding/deviceBinding.cpp \
+        ./samples/mediatest/mediaonvif.cpp \
+        ./samples/mediatest/main.cpp
+
 
 HEADERS += \
-           ./samples/common/common.h
+           ./samples/common/common.h \
+           ./samples/mediatest/mediaonvif.h
 
 INCLUDEPATH += \
                 ./samples/common  \

@@ -16,7 +16,7 @@ const string username = USERNAME;
 const string password =  PASSWORD;
 const string hostname =  HOSTNAME;
 
-vector<pair<string, string>> getProfiles() {
+void getProfiles(vector<pair<string, string>> &profiles) {
 
 //    std::cout << "====================== MediaBinding Profiles ======================" << std::endl;
 
@@ -25,14 +25,13 @@ vector<pair<string, string>> getProfiles() {
     if (SOAP_OK != soap_wsse_add_UsernameTokenDigest(mediaBindingProxy.soap, nullptr, username.c_str(), password.c_str())) {
         std::cerr << "Error: soap_wsse_add_UsernameTokenDigest" << std::endl;
         report_error(mediaBindingProxy.soap);
-        return vector<pair<string, string>>();
+        return;
     }
 
     struct soap* soap = soap_new();
     _trt__GetProfiles *GetProfiles = soap_new__trt__GetProfiles(soap);
     _trt__GetProfilesResponse *GetProfilesResponse = soap_new__trt__GetProfilesResponse(soap);
 
-    vector<pair<string, string>> profiles;
     cout << "Profile name" << "         " << "Profile token" << endl;
     if (SOAP_OK == mediaBindingProxy.GetProfiles(GetProfiles, *GetProfilesResponse)) {
 
@@ -48,7 +47,6 @@ vector<pair<string, string>> getProfiles() {
 
     CLEANUP_SOAP(soap);
 
-    return profiles;
 }
 
 void getSnapshotUri(string &profileToken) {
@@ -113,10 +111,11 @@ void getStreamUri(string &profileToken) {
 
 int main() {
     std::cout << "====================== MediaBinding Profiles ======================" << std::endl;
-    vector<pair<string, string>> profiles = getProfiles();
+
+    vector<pair<string, string>> profiles;
+    getProfiles(profiles);
 
     if (!profiles.empty()) {
-        cout<<profiles[0].second<<endl;
 
         getSnapshotUri(profiles[0].second);
 

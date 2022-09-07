@@ -1,29 +1,18 @@
 #!/bin/bash
 
-g++ -o ipcamera -Wall -DWITH_OPENSSL -DWITH_DOM -DWITH_ZLIB \
-  -I. -I ../include/plugin -I ../include/custom -I ../include -I ../include/soapProxy -I ../samples/common \
-  ../samples/deviceBinding/deviceBinding.cpp \
-  ../src/soapC.cpp \
-  ../src/wsddClient.cpp \
-  ../src/soapProxy/soapAdvancedSecurityServiceBindingProxy.cpp \
-  ../src/soapProxy/soapDeviceBindingProxy.cpp \
-  ../src/soapProxy/soapDeviceIOBindingProxy.cpp \
-  ../src/soapProxy/soapImagingBindingProxy.cpp \
-  ../src/soapProxy/soapMediaBindingProxy.cpp \
-  ../src/soapProxy/soapPTZBindingProxy.cpp \
-  ../src/soapProxy/soapPullPointSubscriptionBindingProxy.cpp \
-  ../src/soapProxy/soapRemoteDiscoveryBindingProxy.cpp \
-  ../src/stdsoap2.cpp \
-  ../src/plugin/dom.cpp \
-  ../src/plugin/smdevp.c \
-  ../src/plugin/mecevp.c \
-  ../src/plugin/wsaapi.c \
-  ../src/plugin/wsseapi.c \
-  ../src/custom/struct_timeval.c \
-  ../src/custom/duration.c \
+gcc -o ipcamera -Wall -DWITH_OPENSSL -DWITH_DOM -DWITH_ZLIB \
+  -I ../include \
+  ../samples/main.c \
+  ../src/server_interface.c \
+  ../src/soapC.c \
+  ../src/soapServer.c \
+  ../src/stdsoap2.c \
+  ../src/wsaapi.c \
+  ../src/duration.c \
+  ../src/struct_timeval.c \
   -lcrypto -lssl -lz
 
 
+  #../src/wsddC.c \
+  #../src/wsddServer.c \
 
-#  ../src/plugin/wsddapi.c \
-#  ../src/wsddServer.cpp \
