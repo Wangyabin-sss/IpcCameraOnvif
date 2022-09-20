@@ -5,7 +5,7 @@ OnvifMedia::OnvifMedia(std::string usern,std::string pwd,std::string ip)
     username = usern;
     password = pwd;
     hostname = std::string("http://"+ip+"/onvif/Media");
-
+    std::cout<<username<<std::endl<<pwd<<std::endl<<hostname<<std::endl;
     soap = soap_new();
     mediaBindingProxy.soap_endpoint = hostname.c_str();
 }
@@ -24,6 +24,7 @@ void OnvifMedia::getProfiles(void)
     if (SOAP_OK != soap_wsse_add_UsernameTokenDigest(mediaBindingProxy.soap, nullptr, username.c_str(), password.c_str())) {
         std::cerr << "Error: soap_wsse_add_UsernameTokenDigest" << std::endl;
         soap_stream_fault(mediaBindingProxy.soap, std::cerr);
+        //std::cout<<mediaBindingProxy.soap->buf<<std::endl;
         return;
     }
 
@@ -41,6 +42,7 @@ void OnvifMedia::getProfiles(void)
     } else {
         std::cerr <<"Error: getProfiles" << std::endl;
         soap_stream_fault(mediaBindingProxy.soap, std::cerr);
+        //std::cout<<std::endl<<mediaBindingProxy.soap->data[0]<<std::endl;
     }
 
 }
